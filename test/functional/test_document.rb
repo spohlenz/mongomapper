@@ -735,8 +735,8 @@ class DocumentTest < Test::Unit::TestCase
       should "allow creating index on multiple keys" do
         @document.ensure_index [[:first_name, 1], [:last_name, -1]]
         MongoMapper.ensure_indexes!
-        
-        @document.should have_index('last_name_-1_first_name_1')        
+
+        @document.should have_index('first_name_1_last_name_-1')
       end
 
       should "work with :index shortcut when defining key" do
