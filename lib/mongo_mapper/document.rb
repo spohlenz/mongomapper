@@ -179,7 +179,7 @@ module MongoMapper
       
       # Returns the collection name, if not set, defaults to class name tableized
       def collection_name
-        @collection_name ||= self.to_s.demodulize.tableize
+        @collection_name ||= self.to_s.tableize.gsub(/\//, '.')
       end
 
       # Returns the mongo ruby driver collection object
