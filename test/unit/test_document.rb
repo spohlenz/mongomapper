@@ -71,6 +71,10 @@ class DocumentTest < Test::Unit::TestCase
       @document.collection.should be_instance_of(Mongo::Collection)
       @document.collection.name.should == 'foobar'
     end
+
+    should "not be abstract by default" do
+      @document.should_not be_abstract_class
+    end
   end # Document class
   
   context "Documents that inherit from other documents" do
@@ -90,6 +94,18 @@ class DocumentTest < Test::Unit::TestCase
     
     should "track subclasses" do
       Message.subclasses.should == [Enter, Exit, Chat]
+    end
+  end
+
+  context "An abstract class" do
+    should "be abstract" do
+      AbstractClass.should be_abstract_class
+    end
+  end
+
+  context "Documents inheriting from an abstract class" do
+    should "determing their own default collection name" do
+      ConcreteClass.collection_name.should == 'concrete_classes'
     end
   end
 

@@ -89,6 +89,13 @@ end
 class User < Account; end
 class Bot < Account; end
 
+class AbstractClass
+  include MongoMapper::Document
+  self.abstract_class = true
+end
+
+class ConcreteClass < AbstractClass; end
+
 class Room
   include MongoMapper::Document
 

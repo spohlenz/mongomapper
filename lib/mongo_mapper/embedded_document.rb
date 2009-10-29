@@ -27,7 +27,7 @@ module MongoMapper
       end
       
       def inherited(subclass)
-        unless subclass.embeddable?
+        unless abstract_class? || subclass.embeddable?
           subclass.set_collection_name(collection_name)
         end
 
@@ -64,6 +64,14 @@ module MongoMapper
 
       def embeddable?
         !self.ancestors.include?(Document)
+      end
+
+      # Set this to true if this is an abstract class (see <tt>abstract_class?</tt>).
+      attr_accessor :abstract_class
+
+      # Returns whether this class is an abstract class.
+      def abstract_class?
+        abstract_class == true
       end
 
       def parent_model
